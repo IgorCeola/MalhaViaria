@@ -4,13 +4,18 @@
 
 package com.mycompany.tsd2;
 
+import view.Tela;
+
 /**
  *
  * @author Mailon
  */
 public class TSD2 {
 
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
-    }
+	public static void main(String[] args) {
+		
+            Tela tela = new Tela();
+            tela.setVisible(true);
+            
+	}
 }
