@@ -35,8 +35,8 @@ public class Posicao {
 
     @Override
     public boolean equals(Object obj) {
-        Posicao other = (Posicao) obj;
-        return this.linha == other.linha && this.coluna == other.coluna;
+        Posicao posicaoVerificada = (Posicao) obj;
+        return this.linha == posicaoVerificada.linha && this.coluna == posicaoVerificada.coluna;
     }
 
     @Override

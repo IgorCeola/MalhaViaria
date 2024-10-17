@@ -1,15 +1,34 @@
-// Imports necessários
+package view;
+
+import controller.ControllerTela;
+import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
 
 // Restante do código...
 
 public class Tela extends javax.swing.JFrame {
-
+    
+    String caminho;
+    private int qtdcarros;
+    private double tempo;
+   
 	private final ControllerTela controller;
 
 	// Adicionando um modelo de tabela
-	private final WorldTableModel tableModel = new WorldTableModel(); // Modelo da tabela
+	 // Modelo da tabela
+            private void inicializacaoMalha() {
+        // Definindo o modelo de tabela com dados e colunas
+        DefaultTableModel tableModel = new DefaultTableModel(
+        );
+        jTable1.setModel(tableModel); // Atualiza a tabela com o modelo
+    }
+
+    private void updateTable() {
+        jTable1.repaint(); // Atualiza a exibição da tabela
+    }
 
 	/**
 	 * Creates new form Tela
@@ -20,17 +39,9 @@ public class Tela extends javax.swing.JFrame {
 		inicializacaoMalha();
 	}
 
-	private void inicializacaoMalha() {
-		// Atualizando a tabela com o modelo de dados
-		jTable1.setModel(tableModel);
-	}
-
-	private void updateTable() {
-		jTable1.repaint();
-	}
 
 	// Buscando o arquivo e retornando o texto do mesmo.
-	public String SelecionaArquivo() {
+	public void SelecionaArquivo() {
 		JFileChooser chooser = new JFileChooser();
 		String caminho = "";
 		int resultado = chooser.showOpenDialog(null);
@@ -39,9 +50,35 @@ public class Tela extends javax.swing.JFrame {
 			System.out.println(arquivo.getAbsolutePath());
 			caminho = arquivo.getAbsolutePath();
 		}
-		return caminho;
+		          setCaminho(caminho);
 	}
 
+    public String getCaminho() {
+        return caminho;
+    }
+
+    public void setCaminho(String caminho) {
+        this.caminho = caminho;
+    }
+
+    public int getQtdcarros() {
+        return qtdcarros;
+    }
+
+    public void setQtdcarros(int qtdcarros) {
+        this.qtdcarros = qtdcarros;
+    }
+
+    public double getTempo() {
+        return tempo;
+    }
+
+    public void setTempo(double tempo) {
+        this.tempo = tempo;
+    }
+     
+    
+    
 	@SuppressWarnings("unchecked")
 	private void initComponents() {
 
@@ -63,6 +100,8 @@ public class Tela extends javax.swing.JFrame {
 
 		btnIniciar.setText("Iniciar");
 		btnIniciar.addActionListener(new java.awt.event.ActionListener() {
+                    
+                        
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				btnIniciarActionPerformed(evt);
 			}
@@ -129,21 +168,26 @@ public class Tela extends javax.swing.JFrame {
 		pack();
 	}
 
+        
+        // ao Iniciar pega a qtd de carros e o tempo 
 	private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		          setQtdcarros(qtdVeiculo.getComponentCount());
+                          setTempo(Intervalo.getComponentCount());
+                          
 	}
 
 	private void btnEncerrarActionPerformed(java.awt.event.ActionEvent evt) {
 		// TODO add your handling code here:
 	}
 
+        
+        // busca o arquivo
 	private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {
-		getjTfile().setText(SelecionaArquivo());
+                                   
+           SelecionaArquivo();
+
 	}
 
-	public JTextField getjTfile() {
-		return selectMapInput;
-	}
 
 	public static void main(String args[]) {
 		/* Set the Nimbus look and feel */
