@@ -25,21 +25,21 @@ import constantes.Geral;
  */
 public class Carro extends Thread { // primeira estrutura do carro
 
-	private static final EnumMap<NovaDirecao, NovaDirecao[]> crossingPaths;
+	private static final EnumMap<NovaDirecao, NovaDirecao[]> caminhosCruzamento;
 
     static {
-        crossingPaths = new EnumMap<>(NovaDirecao.class);
+        caminhosCruzamento = new EnumMap<>(NovaDirecao.class);
 
-        crossingPaths.put(NovaDirecao.VIRA_DIREITA, new NovaDirecao[]{
+        caminhosCruzamento.put(NovaDirecao.VIRA_DIREITA, new NovaDirecao[]{
             NovaDirecao.VIRA_DIREITA
         });
 
-        crossingPaths.put(NovaDirecao.PROSSEGUE, new NovaDirecao[]{
+        caminhosCruzamento.put(NovaDirecao.PROSSEGUE, new NovaDirecao[]{
             NovaDirecao.PROSSEGUE,
             NovaDirecao.PROSSEGUE
         });
 
-        crossingPaths.put(NovaDirecao.VIRA_ESQUERDA, new NovaDirecao[]{
+        caminhosCruzamento.put(NovaDirecao.VIRA_ESQUERDA, new NovaDirecao[]{
             NovaDirecao.PROSSEGUE,
             NovaDirecao.VIRA_ESQUERDA,
             NovaDirecao.PROSSEGUE
@@ -195,7 +195,7 @@ public class Carro extends Thread { // primeira estrutura do carro
         }
 
         NovaDirecao chosenCrossingExit = availableChanges[rng.nextInt(0, availableChanges.length)];
-        NovaDirecao[] path = crossingPaths.get(chosenCrossingExit);
+        NovaDirecao[] path = caminhosCruzamento.get(chosenCrossingExit);
 
         return path;
     }

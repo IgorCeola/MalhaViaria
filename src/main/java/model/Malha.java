@@ -29,7 +29,7 @@ public class Malha {
     private final List<Posicao> entradas;
     private final Direcao[][] saidas;
 
-    // um semáforo por posição do cruzamento
+    // Um semáforo por posição do cruzamento.
     private final Modo[][] Modos;
 
 
@@ -93,7 +93,7 @@ public class Malha {
         
         Malha.generateEntryPoints();
 
-        // find the missing exits for T-shaped crossings
+        // Achando a saída para os cruzamentos em formato de "T".
         for (var i = 0; i < LINHAS; i++) {
             for (var j = 0; j < COLUNAS; j++) {
                 var cruzamentoCimaEsquerdaConstantesCelula
@@ -105,7 +105,6 @@ public class Malha {
                 if (cruzamentoCimaEsquerdaConstantesCelula) {
                     Direcao missing = null;
 
-                    // there should be only one, otherwise the Malha is invalid
                     if (Malha.celulas[i-1][j].verificaVazio()) missing = Direcao.CIMA;
                     if (Malha.celulas[i+2][j].verificaVazio()) missing = Direcao.BAIXO;
                     if (Malha.celulas[i][j-1].verificaVazio()) missing = Direcao.ESQUERDA;
@@ -156,7 +155,7 @@ public class Malha {
     private void generateEntryPoints() {
         entradas.clear();
 
-        // TOP
+        // Cima
         for (int i = 0; i < this.colunas; i++) {
             ConstantesCelula ConstantesCelula = this.celulas[0][i];
             if (ConstantesCelula == ConstantesCelula.BAIXO) {
@@ -164,15 +163,15 @@ public class Malha {
             }
         }
         
-        // LEFT
+        // Direita
         for (int i = 0; i < this.linhas; i++) {
             ConstantesCelula ConstantesCelula = this.celulas[i][0];
-            if (ConstantesCelula == ConstantesCelula.ESQUERDA) {
+            if (ConstantesCelula == ConstantesCelula.DIREITA) {
                 entradas.add(new Posicao(i, 0));
             }
         }
         
-        // BOTTOM
+        // Baixo
         for (int i = 0; i < this.colunas; i++) {
             ConstantesCelula ConstantesCelula = this.celulas[this.linhas-1][i];
             if (ConstantesCelula == ConstantesCelula.CIMA) {
@@ -180,10 +179,10 @@ public class Malha {
             }
         }
         
-        // RIGHT
+        // Esquerda
         for (int i = 0; i < this.linhas; i++) {
             ConstantesCelula ConstantesCelula = this.celulas[i][this.colunas-1];
-            if (ConstantesCelula == ConstantesCelula.DIREITA) {
+            if (ConstantesCelula == ConstantesCelula.ESQUERDA) {
                 entradas.add(new Posicao(i, colunas-1));
             }
         }
